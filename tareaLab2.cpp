@@ -7,17 +7,12 @@ using namespace std;
  *  Escribir un programa que le pida enteros al usuario, guarde los números pares
  * en una  pila y los impares en otra pila.
  * Determianr si la cantidad de ambas pilas es igual
+ * Autor: André González - 00103017
  */
 struct Nodo{
     int dato;
     Nodo *sig;
-}*inicio;
-
-struct NodoI{
-    int dato;
-    NodoI *sig;
-}*inicioI;
-
+}*inicio, *inicioI;
 
 class Pila{
     public:
@@ -41,8 +36,6 @@ class Pila{
             free(temp);
         }
         
-
-
         void mostrarPila(){
             Nodo *temp = inicio;
             if(!inicio){
@@ -54,31 +47,28 @@ class Pila{
                 }
             }
         }
-
-
-
 };
 class PilaI{
     public:
-        NodoI* crearNodoI(int valor){
-            NodoI *nI = new NodoI;
-            nI -> dato = valor;
-            nI -> sig = nullptr;
-            return nI;
+        Nodo* crearNodoI(int valor){
+            Nodo *n = new Nodo;
+            n -> dato = valor;
+            n -> sig = nullptr;
+            return n;
         }
         
         void pushI(int valor){
-            NodoI *nI = crearNodoI(valor);
-            nI->sig = inicioI;
-            inicioI = nI;
+            Nodo *n = crearNodoI(valor);
+            n->sig = inicioI;
+            inicioI = n;
         }
         void popI(){
-            NodoI *temp = inicioI;
+            Nodo *temp = inicioI;
             inicioI = inicioI -> sig;
             free(temp);
         } 
         void mostrarPilaI(){
-            NodoI *temp = inicioI;
+            Nodo *temp = inicioI;
             if(!inicioI){
                 cout<<"Pila vacia"<<endl;
             } else{
@@ -89,6 +79,7 @@ class PilaI{
             }
         }
 };
+
 bool esPar(int num){
     if(num % 2 == 0){
         return true;
@@ -110,7 +101,7 @@ void manipulaArray(int enteros[], int cant, Pila PPares, PilaI PImpares){
         }
     }
     if(pares == impares){
-        cout<<"Hay mismo número de pares " <<endl;
+        cout<<"Misma cantidad de números en ambas pilas " <<endl;
     }else if(pares > impares){
         cout<<"Hay más pares: " <<pares<<" números"<<endl;
     }else{
@@ -134,7 +125,6 @@ int main(){
     manipulaArray(enteros, cant, PPar, PImpar);   
     cout<<"Pila Par: "<<endl;
     PPar.mostrarPila();
-
     cout<<endl<<"-------------------"<<endl<<"Pila Impar: "<<endl;
     PImpar.mostrarPilaI();
     cout<<endl;
